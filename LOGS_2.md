@@ -1,4 +1,4 @@
-# Data Preprocessing Log
+﻿# Data Preprocessing Log
 
 ## Day 2 Work
 
@@ -6,7 +6,7 @@
 
 Establish a clean and reliable preprocessing pipeline starting from raw 1-minute demand data and validate anomaly handling before model training.
 
-### 1. Data Cleaning – Extreme Value Filtering
+### 1. Data Cleaning Extreme Value Filtering
 
 **Input:** Raw 1-minute demand data
 
@@ -14,7 +14,7 @@ Establish a clean and reliable preprocessing pipeline starting from raw 1-minute
 
 **Range enforced:**
 ```
-0 ≤ Demand ≤ 10,000
+0  Demand 10,000
 ```
 
 **Method:** Numeric coercion (`errors='coerce'`) and masking logic
@@ -73,7 +73,7 @@ After overlap analysis:
 
 **Conclusion:** Global distribution methods (IQR, Z-score) were not significantly relevant for this seasonal demand dataset
 
-### 6. Moving Average–Based Outlier Removal
+### 6. Moving Averageâ€“Based Outlier Removal
 
 After extensive parameter testing:
 - Window size experimentation
@@ -106,16 +106,24 @@ Outliers were removed and replaced using a season-aware filling strategy (week-s
 
 The primary demand dataset is now cleaned, validated, and structurally sound.
 
+### 8. Weather Data Inclusion and Decomposition
+
+**Source:** Direct weather file from Open-Meteo
+
+**Process completed:**
+- Included weather data into the workflow
+- Decomposed the large weather file into zone- and region-wise subsets
+- Used proper latitude-longitude based division for regional mapping
+- Grouped and exported outputs by `zone` and `location_id`
+
+**Output created:**
+- 30 weather files
+- Naming pattern: `weather_<ZONE>_<location_id>.csv`
+
+
 ## Next Phase
 
-### 1. Weather–Demand Dataset Creation
-
-**Tasks:**
-- Identify relevant weather parameters: Temperature, Humidity, Wind speed, Others (to be finalized)
-- Decide: Region-to-demand zone mapping and weather station alignment strategy
-- Create merged weather–demand file at 15-minute resolution
-
-### 2. Statistical Analysis
+### 1. Correlation and Statistical Analysis
 
 **Perform exploratory analysis:**
 - Correlation between demand and temperature
